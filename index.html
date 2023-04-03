@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/npm/ol@v7.3.0/dist/ol.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/ol@v7.3.0/ol.css"
+    />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script defer src="main.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h1>USGS Earthquake Data Project</h1>
+      </nav>
+    </header>
+
+    <main>
+      <aside>
+        <label for="selectbox">Base Map:</label>
+        <select class="basemapselector" id="selectbox" name="selectbox">
+          <option value="OSM" selected>OSM - Open Street Maps</option>
+          <option value="Esri">ESRI World Imagery</option>
+          <option value="NatGeo">National Geographic</option>
+        </select>
+        <form>
+          <label for="place">Place:</label>
+          <input type="text" id="place" name="place" required />
+          <button type="submit" id="submit">Search</button>
+          <div class="search-results">
+            <ul id="results-list"></ul>
+          </div>
+          <div class="searchoptions">
+            <label for="mag">Minimum Magnitude:</label>
+            <input
+              type="number"
+              id="mag"
+              name="mag"
+              value="3"
+              min="0"
+              max="10"
+              required
+            />
+            <label for="radius">Radius (Km):</label>
+            <input
+              required
+              type="number"
+              value="1000"
+              id="radius"
+              name="radius"
+              min="0"
+              max="20000"
+            />
+            <label for="startdate">Start Date:</label>
+            <input type="date" required id="startdate" name="startdate" />
+            <label for="enddate">End Date:</label>
+            <input type="date" required id="enddate" name="enddate" />
+          </div>
+          <div class="mapcheck">
+            <span>
+              <input type="checkbox" id="bufferswitcher" checked />
+              <label for="bufferswitcher">Show Buffers</label>
+            </span>
+            <span>
+              <input type="checkbox" id="drawormeasure" />
+              <label for="drawormeasure"
+                >Allow Search with Map Click
+                <span id="measurenote">(Disable to use measure tool)</span>
+              </label>
+            </span>
+          </div>
+        </form>
+        <button id="clear">Clear Map</button>
+      </aside>
+
+      <section>
+        <div class="mapview">
+          <div id="map"></div>
+          <div class="measuregroup">
+            <span class="input-group">
+              <!-- <label for="type">Measurement type </label> -->
+              <select id="type">
+                <option value="choose">Choose an option</option>
+                <option value="length">Length (LineString)</option>
+                <option value="area">Area (Polygon)</option>
+              </select>
+              <span id="info">
+                <span style="color: rgb(255, 255, 255)">Measurement type </span>
+                <br />
+                Click to start drwaing, double click to measure</span
+              >
+            </span>
+          </div>
+          <div id="legend">
+            <h3>Legend</h3>
+            <h4>Magnitude on Richter scale</h4>
+            <ul>
+              <li><span class="green"></span>Below 4</li>
+              <li><span class="yellow"></span>4 to 6</li>
+              <li><span class="red"></span>Above 6</li>
+            </ul>
+          </div>
+        </div>
+        <div class="underMap">
+          <div class="maptype">
+            <span>
+              <input
+                type="radio"
+                name="layerselector"
+                id="cluster"
+                value="cluster"
+                checked
+              />
+              <label for="cluster"
+                >Cluster Map (Choose for averaging-Light weight)</label
+              ></span
+            >
+            <span>
+              <input
+                type="radio"
+                name="layerselector"
+                id="point"
+                value="point"
+              />
+              <label for="point">Point Map (Choose for points details)</label>
+            </span>
+            <span>
+              <input type="radio" name="layerselector" id="heat" value="heat" />
+              <label for="heat"
+                >Heat Map (Choose for clearer density visualization)</label
+              >
+            </span>
+          </div>
+          <div class="typescontrols">
+            <form class="heatmapcontrols" style="display: none">
+              <label for="heatradius">Radius size</label>
+              <input
+                id="heatradius"
+                type="range"
+                min="1"
+                max="50"
+                step="1"
+                value="15"
+              />
+              <label for="heatblur">Blur size</label>
+              <input
+                id="heatblur"
+                type="range"
+                min="1"
+                max="50"
+                step="1"
+                value="20"
+              />
+            </form>
+            <form class="clustermapcontrols" style="display: block">
+              <div class="form-group">
+                <label for="distance" class="col-form-label pb-0"
+                  >Clustering distance</label
+                >
+                <input
+                  id="distance"
+                  class="form-range"
+                  type="range"
+                  min="0"
+                  max="200"
+                  step="1"
+                  value="40"
+                />
+              </div>
+              <div class="form-group">
+                <label for="min-distance" class="col-form-label pb-0"
+                  >Minimum distance between clusters</label
+                >
+                <input
+                  id="min-distance"
+                  class="form-range"
+                  type="range"
+                  min="0"
+                  max="200"
+                  step="1"
+                  value="20"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        <a
+          href="https://github.com/ahmedh7/USGS-earthquake-data-api-implementation-with-openlayers"
+          >Github Repository</a
+        >
+      </p>
+    </footer>
+  </body>
+</html>
