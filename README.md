@@ -6,7 +6,7 @@ This projet consists of 3 main parts:
 2) USGS API for earthquake data
 3) Opencage API & Nominatim API
 
-### 1) Openlayers lirary:
+### 1) Openlayers library:
 - To provide the mapping services and visulaziation. Openlayers provide a highly customizable and high performance web mapping service.
 - For the full documentation: https://openlayers.org/
 
