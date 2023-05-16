@@ -6,7 +6,7 @@ This projet consists of 3 main parts:
 2) USGS API for earthquake data
 3) Opencage API & Nominatim API
 
-## About The Project
+## Try the app
 Try the app on github pages: https://ahmedh7.github.io/USGS-earthquake-data-api-implementation-with-openlayers/
 
 ### 1) Openlayers library:
