@@ -1,5 +1,5 @@
 # USGS earthquake data api implementation with Openlayers Library for JS
-
+## Note: The app uses CDN which is blocked in some countries, if you get blank basemap, please use a VPN
 ## About The Project
 This projet consists of 3 main parts:
 1) Openlayers library
